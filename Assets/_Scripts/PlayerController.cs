@@ -16,14 +16,25 @@ public class PlayerController : MonoBehaviour {
 
     private float SetMaxSpeed; //actual private variable that we use to clamp the speed
 
+    public float RotateSpeed;
+
     public Animator Anim; // Animator
 
     private Vector3 IP; //Input vector
 
+    private Camera cam;
+
+    public GunController gun;
 	// Use this for initialization
 	void Start ()
     {
         RB = GetComponent<Rigidbody>();
+
+        cam = GameObject.FindObjectOfType<Camera>();
+        if(cam == null)
+        {
+            Debug.Log("NO CAMERA");
+        }
 	}
 
     public void updateAnim()
@@ -39,6 +50,8 @@ public class PlayerController : MonoBehaviour {
         IP.x = Input.GetAxisRaw("Horizontal");
         IP.z = Input.GetAxisRaw("Vertical");
 
+        if (Input.GetMouseButton(0)) gun.Fire();
+
         SetMaxSpeed = (Input.GetButton("Sprint")) ? MaxSprintSpeed : MaxWalkSpeed;
         SetAccelerationSpeed = (Input.GetButton("Sprint")) ? SprintAcclerationSpeed : WalkAcclerationSpeed;
     }
@@ -53,12 +66,29 @@ public class PlayerController : MonoBehaviour {
                                   Mathf.Clamp(RB.velocity.z, -SetMaxSpeed, SetMaxSpeed));
     }
 
+    public void doMouseLook() 
+    {
+        RaycastHit hit;
+
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+
+        if(Physics.Raycast(ray, out hit, 10000))
+        {
+            Vector3 forward = (transform.position - hit.point).normalized * -1;
+
+            transform.forward = Vector3.MoveTowards(transform.forward, forward, RotateSpeed * Time.deltaTime);
+            
+            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+        }
+    }
+
     // Update is called once per frame
     void Update ()
     {
         keyInput();
         handleMovement();
         updateAnim();
+        doMouseLook();
 	}
 
 

@@ -86,10 +86,13 @@ public class PlayerController : MonoBehaviour {
     void Update ()
     {
         keyInput();
-        handleMovement();
-        updateAnim();
-        doMouseLook();
 	}
 
+    private void FixedUpdate()
+    {
+        updateAnim();
+        handleMovement();
+        doMouseLook();
+    }
 
 }

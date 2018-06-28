@@ -20,6 +20,10 @@ public class GunController : MonoBehaviour {
 
             TempBullet.GetComponent<Rigidbody>().velocity = transform.forward * 100;
 
+            TempBullet.GetComponent<BulletController>().owner = gameObject;
+
+            Destroy(TempBullet, 5);
+
             SetFireDelay = FireRate;
             Mag--;
         }

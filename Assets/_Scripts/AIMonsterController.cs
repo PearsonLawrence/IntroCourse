@@ -62,7 +62,6 @@ public class AIMonsterController : MonoBehaviour {
         {
             agent.isStopped = false;
         }
-
         agent.SetDestination(Target.transform.position);
 
     }

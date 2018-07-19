@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class HealthComponent : MonoBehaviour {
 
     public float MaxHealth;
@@ -12,6 +12,8 @@ public class HealthComponent : MonoBehaviour {
     public float DamageTimer;
     private float CurrentDamageTimer;
 
+    public Image HealthBar;
+   
     public void Start()
     {
         CurrentHealth = MaxHealth;
@@ -36,7 +38,7 @@ public class HealthComponent : MonoBehaviour {
         if(CurrentDamageTimer <= 0 && CurrentHealth < MaxHealth)
         {
             CurrentHealth += Time.deltaTime * Speed;
-            Debug.Log(CurrentHealth);
+           // Debug.Log(CurrentHealth);
         }
 
         CurrentHealth = (CurrentHealth > MaxHealth) ? MaxHealth : CurrentHealth;
@@ -47,5 +49,10 @@ public class HealthComponent : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.Space)) { TakeDamage(10); }
 
         HealthRegen(regenSpeed);
+
+        if(HealthBar != null)
+        {
+            HealthBar.fillAmount = CurrentHealth / MaxHealth;
+        }
 	}
 }

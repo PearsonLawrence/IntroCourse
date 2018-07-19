@@ -6,14 +6,16 @@ public class AIAnimationManager : MonoBehaviour {
 
     public AIMonsterController Controller;
 
+    public GameObject HitBox;
+
 	public void StartAttack()
     {
-
+        HitBox.SetActive(true);
     }
 
     public void EndDamage()
     {
-
+        HitBox.SetActive(false);
     }
 
     public void EndAttack()

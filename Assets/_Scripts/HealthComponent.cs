@@ -13,7 +13,9 @@ public class HealthComponent : MonoBehaviour {
     private float CurrentDamageTimer;
 
     public Image HealthBar;
-   
+
+    public GameObject PSDeath;
+
     public void Start()
     {
         CurrentHealth = MaxHealth;
@@ -27,7 +29,17 @@ public class HealthComponent : MonoBehaviour {
 
         if(CurrentHealth <= 0)
         {
-            Destroy(gameObject);
+            if(CompareTag("Enemy"))
+            {
+                GetComponent<AIMonsterController>().MySpawner.AIDie();
+                gameObject.SetActive(false);
+                GameObject NewPS = Instantiate(PSDeath, transform.position, transform.rotation);
+                Destroy(NewPS, 5);
+            }
+            else if(CompareTag("Player"))
+            {
+
+            }
         }
     }
 

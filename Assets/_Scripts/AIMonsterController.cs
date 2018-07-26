@@ -7,6 +7,8 @@ public class AIMonsterController : MonoBehaviour {
 
     private NavMeshAgent agent;
 
+    public Spawner MySpawner;
+
     public float MovementSpeed;
     public float AttackRadius;
     public float AttackCooldown;

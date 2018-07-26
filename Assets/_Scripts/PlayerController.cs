@@ -52,6 +52,10 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetMouseButton(0)) gun.Fire();
 
+
+        if (Input.GetKeyDown(KeyCode.R) && gun.Mag < gun.MaxMag)
+            Anim.SetTrigger("Reload");
+
         SetMaxSpeed = (Input.GetButton("Sprint")) ? MaxSprintSpeed : MaxWalkSpeed;
         SetAccelerationSpeed = (Input.GetButton("Sprint")) ? SprintAcclerationSpeed : WalkAcclerationSpeed;
     }

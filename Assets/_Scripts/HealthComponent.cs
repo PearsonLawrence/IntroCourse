@@ -21,6 +21,11 @@ public class HealthComponent : MonoBehaviour {
         CurrentHealth = MaxHealth;
     }
 
+    public void Heal(float HealAmount)
+    {
+        CurrentHealth += HealAmount;
+    }
+
     public void TakeDamage(float DamageAmount)
     {
         CurrentHealth -= DamageAmount;
@@ -38,7 +43,7 @@ public class HealthComponent : MonoBehaviour {
             }
             else if(CompareTag("Player"))
             {
-
+                Application.Quit();
             }
         }
     }

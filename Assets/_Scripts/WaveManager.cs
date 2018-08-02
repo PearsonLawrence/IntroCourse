@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class WaveManager : MonoBehaviour {
 
     public Spawner[] Spawners;
 
     public int Wave;
+    public Text WaveText;
+
     // Use this for initialization
     void Start () {
         Spawners = GameObject.FindObjectsOfType<Spawner>();
@@ -40,6 +42,6 @@ public class WaveManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		
+        if (WaveText) WaveText.text = Wave.ToString();
 	}
 }

@@ -10,7 +10,7 @@ public class BulletController : MonoBehaviour {
     public GameObject PS;
     public void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject != owner)
+        if(other.gameObject != owner && other.GetComponent<BulletController>() == null)
         {
             GameObject TempPS = Instantiate(PS, transform.position, transform.rotation);
             Destroy(TempPS, 3);
